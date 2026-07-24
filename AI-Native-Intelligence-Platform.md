@@ -12,6 +12,12 @@ A one-person build spanning data engineering, applied LLMs, and product delivery
 
 **Stack:** Python (Pandas) · Claude API (LLM tool-use / function calling) · Supabase / PostgreSQL · Streamlit (deployed on Streamlit Cloud) · GitHub Actions (cron) · SQL · bilingual EN / 中文.
 
+**System at a glance**
+- **315 products** across **2 sales channels** and **7 countries**, unified in one governed catalog.
+- **Daily** automated refresh (cloud cron), replacing a laptop-dependent manual process.
+- Forward **and reverse** pricing **validated to the cent** across the full catalog.
+- Grounded LLM agent — **every figure cites its source row**; zero invented numbers by design.
+
 ---
 
 ## Architecture
@@ -60,12 +66,23 @@ A "Product Analyst" that answers plain-language questions ("which French reds ha
 
 ---
 
-## Selected outcomes (sanitized)
+## Evaluation & impact (sanitized)
 
-- **Grounded agent** — every number traces to a source row; zero invented figures by design.
-- **Pricing engine** — penny-exact vs the official regulatory calculator across the full catalog, both directions.
-- **Pipeline** — daily automatic, laptop-independent refresh with single-source-of-truth governance and staleness alerting.
-- **Data quality** — automated entity resolution with human review; canonical naming and country/type coverage across the catalog.
+**How I know it's correct**
+- **Pricing:** automated round-trip tests — reverse-solve a target price, feed it back through the forward engine, assert equality **to the cent**; matched the official regulatory calculator across the full 315-SKU catalog.
+- **Agent grounding:** answers are constrained to the returned rows and display them, so every figure is independently verifiable; tool inputs are schema-validated and sanitized.
+- **Ingest:** regression tests plus fail-loud guards (absent source → skip cleanly; malformed → hard error) so bad data never loads silently.
+
+**Impact**
+- Turned **one-by-one manual pricing into a single catalog-wide run** — the entire catalog is repriced in one pass and stays penny-accurate to regulation.
+- Gave the CEO and sales team **self-serve, plain-language access** to live pricing, stock, and registration data instead of waiting on a manual report.
+- **Single source of truth:** every screen reads one governed database, with visible data-freshness so no one acts on stale numbers.
+
+---
+
+## Screenshots
+
+*(Add 1–2 sanitized screenshots — e.g. the Product Analyst answering a question with its source-row panel, and a sales dashboard — plus a small schema snapshot of the core tables. Blur or omit any real prices, costs, or customer/licensee names.)*
 
 ---
 
